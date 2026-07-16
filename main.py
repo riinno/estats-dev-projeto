@@ -41,3 +41,16 @@ dict_faturamento = {
 }
 
 # -------------------------------------------
+# Tratamento de dados
+
+# criando DataFrame
+df_faturamento = pd.DataFrame.from_dict(dict_faturamento)
+
+# tirando média
+media_valor = df_faturamento["valor"].mean()
+print(media_valor)
+
+# grafico barras
+df_faturamento.plot.bar(x="data_ref", y="valor")
+plt.show()
+

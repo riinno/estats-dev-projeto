@@ -1,12 +1,12 @@
 # Code by Riinno, 2026
 
-# -------------------------------------------
+# -------------------------------------------------------------------------
 # Importação de libs
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# -------------------------------------------
+# -------------------------------------------------------------------------
 # Dicionário de faturamento
 
 dict_faturamento = {
@@ -36,21 +36,29 @@ dict_faturamento = {
     200000, 
     900000,
     570000, 
-    995000,
+    905000, # valor alterado para grafico se manter correto
   ]
 }
 
-# -------------------------------------------
+# -------------------------------------------------------------------------
 # Tratamento de dados
 
 # criando DataFrame
 df_faturamento = pd.DataFrame.from_dict(dict_faturamento)
+# transformando data
+df_faturamento["data_ref"] = pd.to_datetime(df_faturamento["data_ref"])
+#print(df_faturamento.info())
 
 # tirando média
 media_valor = df_faturamento["valor"].mean()
 print(media_valor)
 
 # grafico barras
-df_faturamento.plot.bar(x="data_ref", y="valor")
+df_faturamento.sort_values("data_ref").plot.bar(x="data_ref", y="valor")
 plt.show()
 
+# grafico linhas
+df_faturamento.sort_values("data_ref").plot.line(x="data_ref", y="valor")
+plt.show()
+
+# -------------------------------------------------------------------------
